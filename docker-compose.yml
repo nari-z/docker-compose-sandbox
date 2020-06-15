@@ -1,0 +1,22 @@
+version: '3'
+services:
+
+  caller:
+    build:
+      context: ./caller
+    container_name: caller
+    restart: always
+    ports:
+      - "1111:1111"
+    environment:
+      SSH_SERVER_HOST: "ssh_server"
+    depends_on:
+      - ssh_server
+
+  ssh_server:
+    build:
+      context: ./ssh_server
+    container_name: ssh_server
+    restart: always
+    ports:
+      - "2222:22"
